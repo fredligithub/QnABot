@@ -4,6 +4,7 @@ using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
 using Microsoft.Bot.Builder.Azure;
 using Microsoft.Bot.Builder.CognitiveServices.QnAMaker;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Connector;
 using Microsoft.Rest;
 using QnABot;
@@ -57,7 +58,7 @@ namespace Microsoft.Bot.Sample.QnABot
                     string replyMsg = string.Empty;
                     foreach (var c in predictImgResult.Predictions)
                     {
-                        replyMsg += c.Probability.ToString() + " could be " + c.TagName + Environment.NewLine;
+                        replyMsg += c.Probability.ToString("0.00") + " could be " + c.TagName + Environment.NewLine;
                     }
 
                     await context.PostAsync("File received!And the prediction result is: " + replyMsg);
@@ -106,8 +107,17 @@ namespace Microsoft.Bot.Sample.QnABot
         private async Task AfterAnswerAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             // wait for the next user message
+            //context.Wait(MessageReceivedAsync);
+
+            var sampleForm = FormDialog.FromForm(Order.BuildForm, FormOptions.PromptInStart);
+            context.Call(sampleForm, OrderSubmitted);
+        }
+
+        private async Task OrderSubmitted(IDialogContext context, IAwaitable<Order> result)
+        {
             context.Wait(MessageReceivedAsync);
         }
+
 
         public static string GetSetting(string key)
         {
