@@ -11,7 +11,7 @@ namespace QnABot
         {
             ExchangeService service = new ExchangeService();
             var passWord = new SecureString();
-            foreach (char c in "Password01!@#$%^&".ToCharArray())
+            foreach (char c in "*******".ToCharArray())
             {
                 passWord.AppendChar(c);
             }

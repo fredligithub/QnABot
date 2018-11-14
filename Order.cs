@@ -23,13 +23,16 @@ namespace QnABot
              .Field(nameof(quantity))
              .Field(nameof(disk))
              .Field(nameof(memory))
-            .Message("Welcome to the Order page.")
+            //.Message("Welcome to the Order page.")
             .OnCompletion(async (context, profileForm) =>
             {
+                // Mail to 
+                // Mail.SendMail();
+
                 // Tell the user that the form is complete 
                 await context.PostAsync("Thanks for your info. Your Order ( " + profileForm.quantity.ToString() + " " + profileForm.product
-                    + " with " + profileForm.disk
-                    + " and " + profileForm.memory
+                    + " with " + profileForm.disk + " disk "
+                    + " and " + profileForm.memory + " memory "
                     + " ) is completed!");
             })
             .Build();
@@ -57,8 +60,7 @@ namespace QnABot
     [Serializable]
     public enum Memory
     {
-        FourGB = 1,
-        EightGB = 2
+        Standard_8GB = 1, Maximum_16GB = 2
     }
 
     
