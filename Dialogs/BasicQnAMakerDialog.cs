@@ -142,7 +142,7 @@ namespace Microsoft.Bot.Sample.QnABot
         // Parameters to QnAMakerService are:
         // Required: subscriptionKey, knowledgebaseId, 
         // Optional: defaultMessage, scoreThreshold[Range 0.0 – 1.0]
-        public BasicQnAMakerPreviewDialog() : base(new QnAMakerService(
+        public BasicQnAMakerPreviewDialog() : base(new Microsoft.Bot.Builder.CognitiveServices.QnAMaker.QnAMakerService(
             new QnAMakerAttribute(qnaAuthKey, qnaKBId, "No good match in FAQ!", 0.5, 1, endpointHostName)))
         { }
     }
@@ -159,7 +159,7 @@ namespace Microsoft.Bot.Sample.QnABot
         // Parameters to QnAMakerService are:
         // Required: qnaAuthKey, knowledgebaseId, endpointHostName
         // Optional: defaultMessage, scoreThreshold[Range 0.0 – 1.0]
-        public BasicQnAMakerDialog() : base(new QnAMakerService(
+        public BasicQnAMakerDialog() : base(new Microsoft.Bot.Builder.CognitiveServices.QnAMaker.QnAMakerService(
             new QnAMakerAttribute(qnaAuthKey, qnaKBId, "No good match in FAQ.", 0.01, 1, endpointHostName)))
         { }
     }
@@ -172,7 +172,7 @@ namespace Microsoft.Bot.Sample.QnABot
         static readonly string qnaKBIdZN = ConfigurationManager.AppSettings["QnAKnowledgebaseIdZN"];
         static readonly string endpointHostNameZN = ConfigurationManager.AppSettings["QnAEndpointHostNameZN"];
 
-        public BasicQnAMakerZNDialog() : base(new QnAMakerService(
+        public BasicQnAMakerZNDialog() : base(new Microsoft.Bot.Builder.CognitiveServices.QnAMaker.QnAMakerService(
             new QnAMakerAttribute(qnaAuthKeyZN, qnaKBIdZN, "没有合适的答案.", 0.01, 1, endpointHostNameZN)))
         { }
     }
